@@ -75,14 +75,6 @@ nav.scrolled{box-shadow:0 2px 40px rgba(27,58,107,0.1);}
 .float2-text{color:rgba(255,255,255,0.8);font-size:.8rem;line-height:1.4;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 
-/* TRUSTED */
-#trusted{background:#fff;padding:36px 6%;border-bottom:1px solid rgba(27,58,107,0.06);}
-.trusted-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:3rem;flex-wrap:wrap;}
-.trusted-label{color:var(--gray);font-size:.85rem;font-weight:500;white-space:nowrap;}
-.trusted-logos{display:flex;gap:2.5rem;align-items:center;flex-wrap:wrap;flex:1;}
-.trusted-logo{font-size:1rem;font-weight:700;color:rgba(27,58,107,0.2);letter-spacing:-.5px;transition:color .2s;}
-.trusted-logo:hover{color:var(--navy);}
-
 /* SHARED */
 section{padding:110px 6%;}
 .section-tag{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,rgba(0,188,212,0.08),rgba(255,107,43,0.06));border:1px solid rgba(0,188,212,0.25);color:var(--cyan);padding:.3rem 1rem;border-radius:50px;font-size:.78rem;font-weight:700;margin-bottom:1rem;letter-spacing:.5px;text-transform:uppercase;}
@@ -306,19 +298,7 @@ footer{background:linear-gradient(145deg,#061529,#0d2548);padding:70px 6% 30px;}
   </div>
 </section>
 
-<!-- TRUSTED -->
-<div id="trusted">
-  <div class="trusted-inner">
-    <span class="trusted-label">סומכים עלינו:</span>
-    <div class="trusted-logos">
-      <span class="trusted-logo">TechStart ✦</span>
-      <span class="trusted-logo">GreenBiz ✦</span>
-      <span class="trusted-logo">StudioX ✦</span>
-      <span class="trusted-logo">FoodCo ✦</span>
-      <span class="trusted-logo">UrbanLife ✦</span>
-    </div>
-  </div>
-</div>
+
 
 <!-- SERVICES -->
 <section id="services">
@@ -474,15 +454,42 @@ footer{background:linear-gradient(145deg,#061529,#0d2548);padding:70px 6% 30px;}
   <div class="footer-bottom">© 2025 Webify. כל הזכויות שמורות | <a href="mailto:webify2make@gmail.com">webify2make@gmail.com</a></div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  emailjs.init('SPkl2rDhSuzp9DiNK');
+
   window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',scrollY>30);});
   document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open');});
   const io=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target);}});},{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
   function submitForm(){
-    if(!document.getElementById('fname').value.trim()||!document.getElementById('femail').value.trim()||!document.getElementById('fmsg').value.trim()){alert('נא למלא את כל השדות הנדרשים');return;}
-    document.getElementById('contactForm').style.display='none';
-    document.getElementById('formSuccess').style.display='block';
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const service = document.getElementById('fservice').value.trim();
+    const msg = document.getElementById('fmsg').value.trim();
+
+    if(!name || !email || !msg){ alert('נא למלא את כל השדות הנדרשים'); return; }
+
+    const btn = document.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.querySelector('span').textContent = '⏳ שולח...';
+
+    emailjs.send('service_1zdm3pn', 'template_nhymhfh', {
+      name: name,
+      phone: phone,
+      email: email,
+      service: service,
+      message: msg
+    }).then(() => {
+      document.getElementById('contactForm').style.display='none';
+      document.getElementById('formSuccess').style.display='block';
+    }).catch(() => {
+      alert('אירעה שגיאה בשליחה, אנא נסה שוב או פנה אלינו ישירות במייל.');
+      btn.disabled = false;
+      btn.querySelector('span').textContent = '→ שלח הודעה';
+    });
   }
 </script>
 </body>
