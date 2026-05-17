@@ -69,7 +69,7 @@ body{font-family:'Heebo',sans-serif;background:#fff;color:var(--navy);overflow-x
 /* ===== NAV ===== */
 nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:2px solid rgba(27,58,107,0.15);padding:0 6%;height:72px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s;}
 nav.scrolled{box-shadow:0 2px 40px rgba(27,58,107,0.1);}
-.nav-logo{font-size:1.7rem;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--navy),#005f7a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.nav-logo{font-size:1.7rem;font-weight:900;letter-spacing:-1px;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:0;direction:ltr;unicode-bidi:embed;}
 .nav-logo em{-webkit-text-fill-color:var(--orange);color:var(--orange);font-style:normal;}
 /* Accessible nav links */
 .nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
@@ -736,8 +736,8 @@ body.stop-animations .reveal{opacity:1 !important;transform:none !important;}
 <footer role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="#home" class="nav-logo" style="display:inline-block;margin-bottom:.5rem;" aria-label="Webify - חזרה לדף הבית">
-        W<em style="-webkit-text-fill-color:var(--orange);color:var(--orange)">3</em>bify
+      <a href="#home" class="nav-logo" style="display:inline-flex;margin-bottom:.5rem;" aria-label="Webify - חזרה לדף הבית">
+        W<em>3</em>bify
       </a>
       <p>בונים אתרים שצומחים איתך.<br>Build. Grow. Innovate.</p>
     </div>
