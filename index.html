@@ -251,6 +251,52 @@ footer{background:linear-gradient(145deg,#061529,#0d2548);padding:70px 6% 30px;}
 .reveal-delay1{transition-delay:.12s;}
 .reveal-delay2{transition-delay:.24s;}
 .reveal-delay3{transition-delay:.36s;}
+
+/* ACCESSIBILITY WIDGET */
+#a11y-btn{
+  position:fixed;left:18px;bottom:28px;z-index:9999;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--navy);color:#fff;
+  font-size:1.4rem;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.25);
+  transition:transform .2s,background .2s;
+  user-select:none;
+}
+#a11y-btn:hover{transform:scale(1.1);background:var(--cyan);}
+#a11y-panel{
+  position:fixed;left:18px;bottom:90px;z-index:9998;
+  background:#fff;border-radius:16px;
+  box-shadow:0 10px 40px rgba(0,0,0,.18);
+  padding:1.2rem;width:210px;
+  display:none;flex-direction:column;gap:.5rem;
+  direction:rtl;
+}
+#a11y-panel.open{display:flex;}
+.a11y-title{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:.3rem;text-align:center;}
+.a11y-opt{
+  background:var(--light);border:2px solid transparent;border-radius:10px;
+  padding:.55rem .8rem;font-size:.88rem;cursor:pointer;
+  text-align:right;color:var(--navy);font-family:inherit;
+  transition:all .2s;
+}
+.a11y-opt:hover{border-color:var(--cyan);background:#e8f9fb;}
+.a11y-opt.active{border-color:var(--navy);background:var(--navy);color:#fff;}
+.a11y-reset{
+  margin-top:.3rem;background:none;border:2px solid #ddd;border-radius:10px;
+  padding:.5rem;font-size:.85rem;cursor:pointer;color:var(--gray);
+  font-family:inherit;transition:all .2s;
+}
+.a11y-reset:hover{border-color:#f00;color:#f00;}
+body.big-text p,body.big-text li,body.big-text span{font-size:1.15rem !important;}
+body.big-text h1{font-size:3.2rem !important;}
+body.big-text h2{font-size:2.2rem !important;}
+body.big-text h3{font-size:1.4rem !important;}
+body.high-contrast{filter:contrast(1.6) brightness(1.1);}
+body.high-contrast .service-card,body.high-contrast .tcard,body.high-contrast #navbar{border:2px solid #fff !important;}
+body.highlight-links a{text-decoration:underline !important;outline:3px solid var(--orange) !important;border-radius:3px;outline-offset:2px;}
+body.readable-font,body.readable-font *{font-family:Arial,Helvetica,sans-serif !important;letter-spacing:.4px !important;line-height:2 !important;}
+body.stop-animations *{animation:none !important;transition:none !important;}
+body.stop-animations .reveal{opacity:1 !important;transform:none !important;}
 </style>
 </head>
 <body>
@@ -372,7 +418,7 @@ footer{background:linear-gradient(145deg,#061529,#0d2548);padding:70px 6% 30px;}
       <h2 class="section-title">הסיפור <span>שלנו</span></h2>
       <p class="section-desc">Webify נולדה מתוך אהבה לאינטרנט ולעסקים ישראליים. אנחנו צוות של מעצבים ומפתחים שמאמינים שכל עסק ראוי לנוכחות דיגיטלית שמייצגת אותו בצורה הטובה ביותר.</p>
       <ul class="about-list">
-        <li><div class="check">✓</div>ניסיון של שנים בבניית אתרים לעסקים ישראליים</li>
+        <li><div class="check">✓</div>ניסיון רב בבניית אתרים לעסקים ישראליים</li>
         <li><div class="check">✓</div>עיצוב מותאם אישית לכל לקוח — לא תבניות גנריות</li>
         <li><div class="check">✓</div>תמיכה לאורך כל הדרך — מרעיון לתוצאה</li>
         <li><div class="check">✓</div>מחירים הוגנים ושקיפות מלאה בכל שלב</li>
@@ -434,6 +480,20 @@ footer{background:linear-gradient(145deg,#061529,#0d2548);padding:70px 6% 30px;}
   </div>
 </section>
 
+<!-- ACCESSIBILITY WIDGET -->
+<div id="a11y-btn" onclick="toggleA11y()" title="נגישות" aria-label="פתח תפריט נגישות" role="button" tabindex="0">
+  ♿
+</div>
+<div id="a11y-panel" role="dialog" aria-label="תפריט נגישות">
+  <div class="a11y-title">תפריט נגישות</div>
+  <button class="a11y-opt" onclick="toggleFeature('big-text',this)">🔠 הגדלת טקסט</button>
+  <button class="a11y-opt" onclick="toggleFeature('high-contrast',this)">🌗 ניגודיות גבוהה</button>
+  <button class="a11y-opt" onclick="toggleFeature('highlight-links',this)">🔗 הדגשת קישורים</button>
+  <button class="a11y-opt" onclick="toggleFeature('readable-font',this)">📖 פונט קריא</button>
+  <button class="a11y-opt" onclick="toggleFeature('stop-animations',this)">⏸ עצירת אנימציות</button>
+  <button class="a11y-reset" onclick="resetA11y()">↺ איפוס</button>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -456,6 +516,27 @@ footer{background:linear-gradient(145deg,#061529,#0d2548);padding:70px 6% 30px;}
   document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open');});
   const io=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target);}});},{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  function toggleA11y(){
+    document.getElementById('a11y-panel').classList.toggle('open');
+  }
+  function toggleFeature(cls, el){
+    document.body.classList.toggle(cls);
+    el.classList.toggle('active');
+  }
+  function resetA11y(){
+    ['big-text','high-contrast','highlight-links','readable-font','stop-animations'].forEach(c=>{
+      document.body.classList.remove(c);
+    });
+    document.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));
+  }
+  document.addEventListener('click',function(e){
+    const panel=document.getElementById('a11y-panel');
+    const btn=document.getElementById('a11y-btn');
+    if(panel.classList.contains('open') && !panel.contains(e.target) && !btn.contains(e.target)){
+      panel.classList.remove('open');
+    }
+  });
 
   function submitForm(){
     const name = document.getElementById('fname').value.trim();
