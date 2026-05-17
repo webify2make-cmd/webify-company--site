@@ -3,107 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Webify | Build. Grow. Innovate.</title>
+<title>Webify | Build. Grow. Innovate. - בניית אתרים מקצועיים</title>
+
+<!-- ===== FAVICON (logo.png מ-GitHub) ===== -->
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="shortcut icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --navy: #1B3A6B;
   --navy2: #0d2548;
-  --cyan: #00BCD4;
+  --cyan: #007a99; /* darkened for 4.5:1 contrast on white */
+  --cyan-bright: #00BCD4; /* for dark backgrounds only */
   --cyan2: #00e5ff;
-  --orange: #FF6B2B;
+  --orange: #c94d0f; /* darkened for 4.5:1 on white */
+  --orange-bright: #FF6B2B; /* for dark backgrounds only */
   --orange2: #ff8c55;
   --white: #ffffff;
   --light: #f0f4fa;
-  --gray: #6b7a99;
+  --gray: #4a5568; /* darkened from #6b7a99 for contrast */
   --glass: rgba(255,255,255,0.07);
   --glass-border: rgba(255,255,255,0.12);
+  --focus-ring: #005fcc;
 }
+
+/* ===== GLOBAL RESET & BASE ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Heebo',sans-serif;background:#fff;color:var(--navy);overflow-x:hidden;direction:rtl;}
 
-/* NAV */
-nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(27,58,107,0.08);padding:0 6%;height:72px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s;}
-nav.scrolled{box-shadow:0 2px 40px rgba(27,58,107,0.1);}
-.nav-logo{font-size:1.7rem;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--navy),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;display:flex;align-items:center;gap:2px;}
-.nav-logo em{-webkit-text-fill-color:var(--orange);color:var(--orange);font-style:normal;}
-.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
-.nav-links a{text-decoration:none;color:var(--navy);font-weight:500;font-size:.93rem;position:relative;padding-bottom:3px;transition:color .25s;}
-.nav-links a::after{content:'';position:absolute;bottom:0;right:0;width:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--cyan));transition:width .3s;}
-.nav-links a:hover{color:var(--cyan);}
-.nav-links a:hover::after{width:100%;}
-.nav-cta{background:linear-gradient(135deg,var(--orange),var(--orange2))!important;color:white!important;padding:.55rem 1.5rem!important;border-radius:50px;font-weight:700!important;box-shadow:0 4px 15px rgba(255,107,43,0.3);transition:transform .2s,box-shadow .2s!important;}
-.nav-cta::after{display:none!important;}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,107,43,0.45)!important;color:white!important;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
-.hamburger span{width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.3s;}
+/* ===== FOCUS STYLES (WCAG 2.4.11 / 2.4.7) ===== */
+/* Highly visible focus ring for all interactive elements */
+:focus-visible {
+  outline: 3px solid var(--focus-ring) !important;
+  outline-offset: 3px !important;
+  border-radius: 3px;
+}
+/* Remove default outline only when focus-visible is supported */
+:focus:not(:focus-visible) {
+  outline: none;
+}
 
-/* HERO */
+/* ===== SKIP NAVIGATION (WCAG 2.4.1) ===== */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  background: var(--focus-ring);
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  z-index: 99999;
+  border-radius: 0 0 8px 8px;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff !important;
+}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:2px solid rgba(27,58,107,0.15);padding:0 6%;height:72px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 2px 40px rgba(27,58,107,0.1);}
+.nav-logo{font-size:1.7rem;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--navy),#005f7a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.nav-logo em{-webkit-text-fill-color:var(--orange);color:var(--orange);font-style:normal;}
+/* Accessible nav links */
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;color:var(--navy);font-weight:600;font-size:.93rem;position:relative;padding-bottom:3px;transition:color .25s;}
+.nav-links a::after{content:'';position:absolute;bottom:0;right:0;width:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--cyan-bright));transition:width .3s;}
+.nav-links a:hover{color:var(--navy2);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a[aria-current="page"]{color:var(--navy2);font-weight:700;}
+.nav-links a[aria-current="page"]::after{width:100%;}
+/* CTA button in nav – meets minimum touch target 44×44 (WCAG 2.5.5) */
+.nav-cta{
+  background:linear-gradient(135deg,var(--orange),#d45e20) !important;
+  color:white !important;
+  padding:.65rem 1.5rem !important;
+  border-radius:50px;
+  font-weight:700 !important;
+  box-shadow:0 4px 15px rgba(201,77,15,0.4);
+  min-height:44px;
+  display:inline-flex !important;
+  align-items:center;
+}
+.nav-cta::after{display:none !important;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,77,15,0.5) !important;color:white !important;}
+/* Hamburger – min 44×44px touch target (WCAG 2.5.5 / 2.5.8) */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  width:44px;height:44px;align-items:center;justify-content:center;
+  background:none;border:2px solid transparent;border-radius:8px;
+}
+.hamburger:hover{background:var(--light);}
+.hamburger span{width:24px;height:2.5px;background:var(--navy);border-radius:2px;transition:.3s;display:block;}
+
+/* ===== HERO ===== */
 #home{min-height:100vh;background:linear-gradient(150deg,#061529 0%,#0d2548 40%,#1B3A6B 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 6% 60px;gap:4rem;position:relative;overflow:hidden;}
-.hero-glow-1{position:absolute;top:-200px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,188,212,0.18) 0%,transparent 65%);border-radius:50%;animation:glow1 9s ease-in-out infinite;pointer-events:none;}
-.hero-glow-2{position:absolute;bottom:-200px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,107,43,0.15) 0%,transparent 65%);border-radius:50%;animation:glow2 11s ease-in-out infinite;pointer-events:none;}
-.grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero-glow-1{position:absolute;top:-200px;left:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,188,212,0.18) 0%,transparent 65%);border-radius:50%;animation:glow1 9s ease-in-out infinite;pointer-events:none;aria-hidden:true;}
+.hero-glow-2{position:absolute;bottom:-200px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,107,43,0.15) 0%,transparent 65%);border-radius:50%;animation:glow2 11s ease-in-out infinite;pointer-events:none;aria-hidden:true;}
+.grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;aria-hidden:true;}
 @keyframes glow1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(80px,50px) scale(1.15)}}
 @keyframes glow2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,-40px) scale(1.1)}}
 .hero-text{position:relative;z-index:1;}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,188,212,0.12);border:1px solid rgba(0,188,212,0.35);color:var(--cyan);padding:.4rem 1.1rem;border-radius:50px;font-size:.82rem;font-weight:600;margin-bottom:1.6rem;letter-spacing:.5px;animation:fadeUp .6s ease both;}
-.badge-dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.4);color:#7de8f5;padding:.4rem 1.1rem;border-radius:50px;font-size:.82rem;font-weight:600;margin-bottom:1.6rem;letter-spacing:.5px;animation:fadeUp .6s ease both;}
+.badge-dot{width:7px;height:7px;background:#7de8f5;border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+/* Hero heading – correct heading hierarchy h1 (WCAG 1.3.1) */
 .hero-title{font-size:clamp(2.6rem,5vw,4.2rem);font-weight:900;color:white;line-height:1.08;margin-bottom:1.4rem;animation:fadeUp .6s .1s ease both;}
-.hero-title .line2{background:linear-gradient(135deg,var(--cyan),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero-title .line3{color:var(--orange);}
-.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.65);max-width:500px;line-height:1.85;font-weight:300;margin-bottom:2.5rem;animation:fadeUp .6s .2s ease both;}
+.hero-title .line2{color:#7de8f5;} /* bright on dark – sufficient contrast */
+.hero-title .line3{color:#ffaa80;} /* bright orange on dark – sufficient contrast */
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.82);max-width:500px;line-height:1.85;font-weight:300;margin-bottom:2.5rem;animation:fadeUp .6s .2s ease both;}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .6s .3s ease both;}
-.btn-primary{background:linear-gradient(135deg,var(--orange),var(--orange2));color:white;padding:.85rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 8px 25px rgba(255,107,43,0.4);transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem;}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(255,107,43,0.5);}
-.btn-secondary{border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.85);padding:.85rem 2rem;border-radius:50px;font-weight:500;font-size:.95rem;text-decoration:none;backdrop-filter:blur(10px);transition:border-color .2s,background .2s;display:inline-flex;align-items:center;gap:.5rem;}
-.btn-secondary:hover{border-color:var(--cyan);background:rgba(0,188,212,0.1);}
+/* Buttons – min 44×44px touch target (WCAG 2.5.5/2.5.8) */
+.btn-primary{background:linear-gradient(135deg,#c94d0f,#d45e20);color:white;padding:.85rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 8px 25px rgba(201,77,15,0.45);transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem;min-height:44px;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(201,77,15,0.55);}
+.btn-secondary{border:2px solid rgba(255,255,255,0.55);color:white;padding:.85rem 2rem;border-radius:50px;font-weight:600;font-size:.95rem;text-decoration:none;backdrop-filter:blur(10px);transition:border-color .2s,background .2s;display:inline-flex;align-items:center;gap:.5rem;min-height:44px;}
+.btn-secondary:hover{border-color:#7de8f5;background:rgba(0,188,212,0.12);}
 .hero-stats{display:flex;gap:1.5rem;margin-top:3rem;animation:fadeUp .6s .4s ease both;}
 .stat{text-align:center;padding:1rem 1.5rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;backdrop-filter:blur(10px);}
-.stat-num{font-size:1.8rem;font-weight:900;color:var(--cyan);}
-.stat-label{font-size:.75rem;color:rgba(255,255,255,0.45);font-weight:400;margin-top:.2rem;}
+.stat-num{font-size:1.8rem;font-weight:900;color:#7de8f5;}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,0.65);font-weight:400;margin-top:.2rem;}
 .hero-visual{position:relative;z-index:1;animation:fadeUp .8s .2s ease both;}
 .hero-img-wrap{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.5);}
 .hero-img-wrap img{width:100%;height:460px;object-fit:cover;display:block;}
 .hero-float-card{position:absolute;bottom:-20px;right:-20px;background:white;border-radius:18px;padding:1.2rem 1.5rem;box-shadow:0 20px 50px rgba(27,58,107,0.2);display:flex;align-items:center;gap:1rem;min-width:200px;}
-.float-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--cyan),var(--navy));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.float-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#00BCD4,var(--navy));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
 .float-text strong{display:block;color:var(--navy);font-size:1rem;font-weight:700;}
 .float-text span{color:var(--gray);font-size:.8rem;}
 .hero-float-card2{position:absolute;top:-15px;left:-15px;background:linear-gradient(135deg,var(--navy),#0d2548);border-radius:18px;padding:1rem 1.3rem;box-shadow:0 15px 40px rgba(0,0,0,0.3);border:1px solid var(--glass-border);display:flex;align-items:center;gap:.8rem;}
-.float2-num{font-size:1.5rem;font-weight:900;color:var(--orange);}
-.float2-text{color:rgba(255,255,255,0.8);font-size:.8rem;line-height:1.4;}
+.float2-num{font-size:1.5rem;font-weight:900;color:#ffaa80;}
+.float2-text{color:rgba(255,255,255,0.85);font-size:.8rem;line-height:1.4;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 
-/* SHARED */
+/* ===== SHARED SECTION STYLES ===== */
 section{padding:110px 6%;}
-.section-tag{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,rgba(0,188,212,0.08),rgba(255,107,43,0.06));border:1px solid rgba(0,188,212,0.25);color:var(--cyan);padding:.3rem 1rem;border-radius:50px;font-size:.78rem;font-weight:700;margin-bottom:1rem;letter-spacing:.5px;text-transform:uppercase;}
+.section-tag{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,rgba(0,120,153,0.1),rgba(201,77,15,0.07));border:1px solid rgba(0,120,153,0.3);color:#005f7a;padding:.3rem 1rem;border-radius:50px;font-size:.78rem;font-weight:700;margin-bottom:1rem;letter-spacing:.5px;text-transform:uppercase;}
+/* Heading hierarchy (WCAG 1.3.1) – all section titles are h2 */
 .section-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--navy);line-height:1.1;margin-bottom:1rem;}
-.section-title span{color:var(--cyan);}
+.section-title span{color:#005f7a;}
 .section-title em{color:var(--orange);font-style:normal;}
 .section-desc{color:var(--gray);font-size:1rem;max-width:560px;line-height:1.85;}
 
-/* SERVICES */
+/* ===== SERVICES ===== */
 #services{background:var(--light);}
 .services-header{text-align:center;margin-bottom:4rem;}
 .services-header .section-desc{margin:0 auto;}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto;}
 .services-grid .service-card:nth-child(4){grid-column:1;}
 .services-grid .service-card:nth-child(5){grid-column:2;}
-.service-card{background:#fff;border:1px solid rgba(27,58,107,0.07);border-radius:22px;overflow:hidden;transition:transform .35s,box-shadow .35s;cursor:default;}
+.service-card{background:#fff;border:1.5px solid rgba(27,58,107,0.1);border-radius:22px;overflow:hidden;transition:transform .35s,box-shadow .35s;cursor:default;}
 .service-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(27,58,107,0.12);}
 .service-card-img{width:100%;height:180px;object-fit:cover;display:block;}
 .service-card-body{padding:1.8rem;}
 .service-icon-small{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem;}
-.ic-cyan{background:rgba(0,188,212,0.1);}
-.ic-orange{background:rgba(255,107,43,0.1);}
+.ic-cyan{background:rgba(0,120,153,0.1);}
+.ic-orange{background:rgba(201,77,15,0.1);}
 .ic-navy{background:rgba(27,58,107,0.08);}
+/* h3 inside cards – correct hierarchy after section h2 */
 .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:var(--navy);}
 .service-card p{color:var(--gray);line-height:1.7;font-size:.9rem;}
-.service-card-link{display:inline-flex;align-items:center;gap:.3rem;color:var(--cyan);font-size:.85rem;font-weight:700;margin-top:1rem;text-decoration:none;transition:gap .2s;}
-.service-card-link:hover{gap:.6rem;}
+/* Card links – meaningful text for screen readers (WCAG 2.4.6) */
+.service-card-link{display:inline-flex;align-items:center;gap:.3rem;color:#005f7a;font-size:.85rem;font-weight:700;margin-top:1rem;text-decoration:underline;transition:gap .2s;min-height:44px;padding:.25rem 0;}
+.service-card-link:hover{gap:.6rem;color:var(--navy);}
 
-/* ABOUT */
+/* ===== ABOUT ===== */
 #about{background:var(--light);}
 .about-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1100px;margin:0 auto;}
 .about-imgs{position:relative;height:520px;}
@@ -111,99 +179,174 @@ section{padding:110px 6%;}
 .about-img-main img{width:100%;height:100%;object-fit:cover;}
 .about-img-sec{position:absolute;bottom:0;left:0;width:55%;height:260px;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(27,58,107,0.18);border:4px solid #fff;}
 .about-img-sec img{width:100%;height:100%;object-fit:cover;}
-.about-exp-badge{position:absolute;top:40px;left:-10px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:white;padding:1rem 1.3rem;border-radius:18px;box-shadow:0 10px 30px rgba(255,107,43,0.35);text-align:center;}
+.about-exp-badge{position:absolute;top:40px;left:-10px;background:linear-gradient(135deg,#c94d0f,#d45e20);color:white;padding:1rem 1.3rem;border-radius:18px;box-shadow:0 10px 30px rgba(201,77,15,0.4);text-align:center;}
 .about-exp-badge strong{display:block;font-size:2rem;font-weight:900;line-height:1;}
-.about-exp-badge span{font-size:.75rem;opacity:.85;}
+.about-exp-badge span{font-size:.75rem;opacity:.9;}
 .about-content .section-desc{margin-bottom:2rem;}
 .about-list{list-style:none;display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem;}
 .about-list li{display:flex;align-items:flex-start;gap:.9rem;color:var(--navy);font-weight:500;font-size:.95rem;line-height:1.6;}
-.check{width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:2px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));display:flex;align-items:center;justify-content:center;color:white;font-size:.65rem;font-weight:900;}
+.check{width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:2px;background:linear-gradient(135deg,#00BCD4,#00e5ff);display:flex;align-items:center;justify-content:center;color:white;font-size:.65rem;font-weight:900;}
 
-/* CONTACT */
+/* ===== CONTACT ===== */
 #contact{background:var(--light);}
 .contact-inner{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start;max-width:1100px;margin:0 auto;}
 .contact-img-wrap{border-radius:22px;overflow:hidden;margin-bottom:2rem;box-shadow:0 20px 50px rgba(27,58,107,0.12);}
 .contact-img-wrap img{width:100%;height:220px;object-fit:cover;display:block;}
 .contact-info{display:flex;flex-direction:column;gap:1rem;}
-.contact-item{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem;border-radius:16px;background:#fff;border:1px solid rgba(27,58,107,0.07);transition:transform .2s;}
+.contact-item{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem;border-radius:16px;background:#fff;border:1.5px solid rgba(27,58,107,0.08);transition:transform .2s;}
 .contact-item:hover{transform:translateX(-4px);}
-.contact-item-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,var(--cyan),var(--navy));display:flex;align-items:center;justify-content:center;font-size:1rem;}
-.contact-item-text h4{font-weight:700;margin-bottom:.2rem;color:var(--navy);font-size:.9rem;}
-.contact-item-text p,.contact-item-text a{color:var(--gray);font-size:.87rem;text-decoration:none;}
-.contact-item-text a:hover{color:var(--cyan);}
-.contact-form-wrap{background:#fff;border-radius:24px;padding:2.5rem;box-shadow:0 10px 40px rgba(27,58,107,0.08);border:1px solid rgba(27,58,107,0.06);}
+.contact-item-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,#00BCD4,var(--navy));display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.contact-item-text h3{font-weight:700;margin-bottom:.2rem;color:var(--navy);font-size:.9rem;}
+.contact-item-text p,.contact-item-text a{color:var(--gray);font-size:.87rem;text-decoration:underline;}
+.contact-item-text a:hover{color:var(--navy);}
+.contact-form-wrap{background:#fff;border-radius:24px;padding:2.5rem;box-shadow:0 10px 40px rgba(27,58,107,0.08);border:1.5px solid rgba(27,58,107,0.07);}
 .form-title{font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:1.5rem;}
 .contact-form{display:flex;flex-direction:column;gap:1rem;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 .form-group{display:flex;flex-direction:column;gap:.4rem;}
-.form-group label{font-size:.82rem;font-weight:700;color:var(--navy);}
-.form-group input,.form-group textarea{padding:.85rem 1rem;border-radius:12px;border:1.5px solid rgba(27,58,107,0.12);font-family:'Heebo',sans-serif;font-size:.92rem;color:var(--navy);background:var(--light);direction:rtl;transition:border-color .2s,box-shadow .2s;outline:none;}
-.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(107,122,153,0.6);}
-.form-group input:focus,.form-group textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,188,212,0.1);}
+/* Labels always visible (WCAG 1.3.1, 3.3.2) */
+.form-group label{font-size:.88rem;font-weight:700;color:var(--navy);}
+.required-mark{color:#c30000;margin-right:2px;aria-hidden:true;}
+/* Input fields – sufficient contrast border (WCAG 1.4.11) */
+.form-group input,.form-group textarea{
+  padding:.85rem 1rem;border-radius:12px;
+  border:2px solid #7a8caa; /* visible border ≥3:1 against background */
+  font-family:'Heebo',sans-serif;font-size:.92rem;color:var(--navy);
+  background:#fff;direction:rtl;
+  transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.form-group input::placeholder,.form-group textarea::placeholder{color:#6b7a99;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--focus-ring);box-shadow:0 0 0 3px rgba(0,95,204,0.2);}
+/* Error state (WCAG 3.3.1) */
+.form-group input[aria-invalid="true"],.form-group textarea[aria-invalid="true"]{border-color:#c30000;}
+.field-error{color:#c30000;font-size:.82rem;font-weight:600;display:none;}
+.field-error.visible{display:block;}
 .form-group textarea{resize:vertical;min-height:110px;}
-.btn-submit{background:linear-gradient(135deg,var(--navy),var(--navy2));color:white;padding:.95rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;font-family:'Heebo',sans-serif;width:100%;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;}
+/* Submit button */
+.btn-submit{background:linear-gradient(135deg,var(--navy),var(--navy2));color:white;padding:.95rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;font-family:'Heebo',sans-serif;width:100%;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;min-height:48px;}
 .btn-submit span{position:relative;z-index:1;}
-.btn-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cyan),var(--orange));opacity:0;transition:opacity .3s;}
+.btn-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#007a99,#c94d0f);opacity:0;transition:opacity .3s;}
 .btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(27,58,107,0.3);}
 .btn-submit:hover::before{opacity:1;}
-.form-success{display:none;text-align:center;padding:2.5rem;background:linear-gradient(135deg,rgba(0,188,212,0.07),rgba(27,58,107,0.04));border-radius:16px;border:1px solid rgba(0,188,212,0.2);}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+/* Success / Error messages with role (WCAG 4.1.3) */
+.form-success{display:none;text-align:center;padding:2.5rem;background:linear-gradient(135deg,rgba(0,120,153,0.07),rgba(27,58,107,0.04));border-radius:16px;border:2px solid rgba(0,120,153,0.25);}
 .form-success h3{color:var(--navy);margin-bottom:.5rem;}
 .form-success p{color:var(--gray);}
 
-/* CTA */
+/* ===== CTA SECTION ===== */
 #cta{background:linear-gradient(135deg,var(--navy),#0d2548);padding:80px 6%;text-align:center;position:relative;overflow:hidden;}
-#cta::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(0,188,212,0.12) 1px,transparent 1px);background-size:30px 30px;}
+#cta::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(0,188,212,0.12) 1px,transparent 1px);background-size:30px 30px;aria-hidden:true;}
 .cta-inner{position:relative;z-index:1;}
 .cta-inner h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:white;margin-bottom:1rem;}
-.cta-inner h2 span{color:var(--cyan);}
-.cta-inner p{color:rgba(255,255,255,0.65);font-size:1rem;margin-bottom:2rem;}
+.cta-inner h2 span{color:#7de8f5;}
+.cta-inner p{color:rgba(255,255,255,0.8);font-size:1rem;margin-bottom:2rem;}
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer{background:linear-gradient(145deg,#061529,#0d2548);padding:70px 6% 30px;}
-.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,0.08);}
-.footer-brand p{color:rgba(255,255,255,0.5);font-size:.88rem;line-height:1.8;margin-top:1rem;max-width:270px;}
-.footer-col h4{color:white;font-weight:700;margin-bottom:1.2rem;font-size:.95rem;}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.footer-brand p{color:rgba(255,255,255,0.65);font-size:.88rem;line-height:1.8;margin-top:1rem;max-width:270px;}
+.footer-col h2{color:white;font-weight:700;margin-bottom:1.2rem;font-size:.95rem;}
 .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem;}
-.footer-col a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:.88rem;transition:color .2s;}
-.footer-col a:hover{color:var(--cyan);}
-.footer-bottom{text-align:center;padding-top:30px;font-size:.82rem;max-width:1100px;margin:0 auto;color:rgba(255,255,255,0.3);}
-.footer-bottom a{color:var(--cyan);text-decoration:none;}
+.footer-col a{color:rgba(255,255,255,0.65);text-decoration:underline;font-size:.88rem;transition:color .2s;}
+.footer-col a:hover{color:#7de8f5;}
+.footer-bottom{text-align:center;padding-top:30px;font-size:.82rem;max-width:1100px;margin:0 auto;color:rgba(255,255,255,0.5);}
+.footer-bottom a{color:#7de8f5;text-decoration:underline;}
 
-/* TABLET */
+/* ===== ACCESSIBILITY WIDGET ===== */
+/* Positioned left per Israeli standard – accessible, permanent widget */
+#a11y-btn{
+  position:fixed;left:18px;bottom:28px;z-index:9999;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--navy);color:#fff;
+  font-size:1.4rem;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3);
+  transition:transform .2s,background .2s;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+#a11y-btn:hover{transform:scale(1.1);background:#005f7a;}
+#a11y-panel{
+  position:fixed;left:18px;bottom:90px;z-index:9998;
+  background:#fff;border-radius:16px;
+  box-shadow:0 10px 40px rgba(0,0,0,.2);
+  padding:1.2rem;width:220px;
+  display:none;flex-direction:column;gap:.5rem;
+  direction:rtl;
+  border:2px solid rgba(27,58,107,0.15);
+}
+#a11y-panel.open{display:flex;}
+.a11y-title{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:.3rem;text-align:center;}
+/* A11y buttons – min 44px height (WCAG 2.5.5) */
+.a11y-opt{
+  background:var(--light);border:2px solid transparent;border-radius:10px;
+  padding:.65rem .8rem;font-size:.88rem;cursor:pointer;
+  text-align:right;color:var(--navy);font-family:inherit;
+  transition:all .2s;min-height:44px;width:100%;
+}
+.a11y-opt:hover{border-color:#005f7a;background:#e8f3f6;}
+.a11y-opt.active{border-color:var(--navy);background:var(--navy);color:#fff;}
+.a11y-reset{
+  margin-top:.3rem;background:none;border:2px solid #ccc;border-radius:10px;
+  padding:.5rem;font-size:.85rem;cursor:pointer;color:var(--gray);
+  font-family:inherit;transition:all .2s;min-height:44px;width:100%;
+}
+.a11y-reset:hover{border-color:#c30000;color:#c30000;}
+
+/* ===== ACCESSIBILITY FEATURE CLASSES ===== */
+body.big-text p,body.big-text li,body.big-text span,body.big-text label{font-size:1.15rem !important;}
+body.big-text h1{font-size:3.2rem !important;}
+body.big-text h2{font-size:2.2rem !important;}
+body.big-text h3{font-size:1.4rem !important;}
+/* High contrast – meets enhanced contrast AA (WCAG 1.4.3) */
+body.high-contrast{background:#000 !important;color:#fff !important;filter:none;}
+body.high-contrast *{background-color:transparent;}
+body.high-contrast nav,body.high-contrast .service-card,body.high-contrast .contact-form-wrap,body.high-contrast .contact-item,body.high-contrast #a11y-panel{background:#000 !important;border:2px solid #fff !important;color:#fff !important;}
+body.high-contrast a,body.high-contrast .nav-links a,body.high-contrast .footer-col a,body.high-contrast .service-card-link{color:#ffff00 !important;}
+body.high-contrast h1,body.high-contrast h2,body.high-contrast h3,body.high-contrast .section-title,body.high-contrast .hero-title,body.high-contrast .float-text strong{color:#fff !important;}
+body.high-contrast p,body.high-contrast .section-desc,body.high-contrast .service-card p,body.high-contrast .hero-sub{color:#eee !important;}
+body.high-contrast .form-group input,body.high-contrast .form-group textarea{background:#111 !important;color:#fff !important;border:2px solid #fff !important;}
+body.high-contrast .btn-primary,body.high-contrast .btn-submit,body.high-contrast .nav-cta{background:#ffff00 !important;color:#000 !important;border:2px solid #000 !important;}
+body.high-contrast .btn-secondary{border-color:#fff !important;}
+body.high-contrast .stat-num{color:#ffff00 !important;}
+body.high-contrast .a11y-opt{background:#111 !important;color:#fff !important;}
+body.high-contrast .a11y-opt.active{background:#ffff00 !important;color:#000 !important;}
+body.high-contrast #home,body.high-contrast #cta,body.high-contrast footer{background:#000 !important;}
+/* Highlight links */
+body.highlight-links a{text-decoration:underline !important;outline:3px solid var(--orange) !important;border-radius:3px;outline-offset:2px;}
+/* Readable font */
+body.readable-font,body.readable-font *{font-family:Arial,Helvetica,sans-serif !important;letter-spacing:.4px !important;line-height:2 !important;}
+/* Stop animations */
+body.stop-animations *{animation:none !important;transition:none !important;}
+body.stop-animations .reveal{opacity:1 !important;transform:none !important;}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay1{transition-delay:.12s;}
+.reveal-delay2{transition-delay:.24s;}
+.reveal-delay3{transition-delay:.36s;}
+
+/* ===== TABLET ===== */
 @media(max-width:900px){
   section{padding:70px 5%;}
-
-  /* Hero */
   #home{grid-template-columns:1fr;text-align:center;padding:100px 6% 60px;}
   .hero-visual{display:none;}
   .hero-sub{margin-left:auto;margin-right:auto;}
   .hero-btns{justify-content:center;}
   .hero-stats{justify-content:center;flex-wrap:wrap;gap:1rem;}
-
-  /* Services */
   .services-grid{grid-template-columns:1fr 1fr;}
-
-  /* About */
   .about-inner{grid-template-columns:1fr;gap:3rem;}
   .about-imgs{height:320px;margin-bottom:0;}
-
-  /* Contact */
   .contact-inner{grid-template-columns:1fr;gap:2.5rem;}
-
-  /* Footer */
   .footer-inner{grid-template-columns:1fr 1fr;gap:2.5rem;}
 }
 
-/* MOBILE */
+/* ===== MOBILE ===== */
 @media(max-width:600px){
   section{padding:55px 5%;}
-
-  /* Nav */
-  .nav-links{display:none;flex-direction:column;position:absolute;top:72px;right:0;left:0;background:#fff;padding:1.2rem 6%;box-shadow:0 10px 30px rgba(0,0,0,.08);gap:1.2rem;}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:72px;right:0;left:0;background:#fff;padding:1.2rem 6%;box-shadow:0 10px 30px rgba(0,0,0,.1);gap:1.2rem;border-bottom:2px solid rgba(27,58,107,0.1);}
   .nav-links.open{display:flex;}
   .hamburger{display:flex;}
-
-  /* Hero */
   #home{padding:90px 5% 50px;gap:2rem;}
   .hero-badge{font-size:.75rem;}
   .hero-title{font-size:2.2rem;}
@@ -213,129 +356,107 @@ footer{background:linear-gradient(145deg,#061529,#0d2548);padding:70px 6% 30px;}
   .hero-stats{gap:.7rem;}
   .stat{padding:.8rem 1rem;flex:1;min-width:80px;}
   .stat-num{font-size:1.4rem;}
-
-  /* Trusted */
-  #trusted{padding:24px 5%;}
-  .trusted-inner{flex-direction:column;gap:1rem;text-align:center;}
-  .trusted-logos{justify-content:center;gap:1.2rem;}
-  .trusted-logo{font-size:.85rem;}
-
-  /* Services */
   .services-grid{grid-template-columns:1fr;}
   .service-card-img{height:200px;}
-
-  /* About */
   .about-imgs{height:260px;}
   .about-img-main{width:80%;}
   .about-img-sec{width:52%;height:180px;}
   .about-exp-badge{padding:.8rem 1rem;}
   .about-exp-badge strong{font-size:1.6rem;}
   .about-list li{font-size:.9rem;}
-
-  /* Contact */
   .form-row{grid-template-columns:1fr;}
   .contact-form-wrap{padding:1.5rem;}
   .contact-img-wrap img{height:160px;}
-
-  /* CTA */
   #cta{padding:55px 5%;}
   .cta-inner h2{font-size:1.6rem;}
-
-  /* Footer */
   .footer-inner{grid-template-columns:1fr;gap:2rem;padding-bottom:30px;}
   .footer-brand p{max-width:100%;}
   .footer-bottom{font-size:.78rem;}
 }
-.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-.reveal-delay1{transition-delay:.12s;}
-.reveal-delay2{transition-delay:.24s;}
-.reveal-delay3{transition-delay:.36s;}
 
-/* ACCESSIBILITY WIDGET */
-#a11y-btn{
-  position:fixed;left:18px;bottom:28px;z-index:9999;
-  width:52px;height:52px;border-radius:50%;
-  background:var(--navy);color:#fff;
-  font-size:1.4rem;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.25);
-  transition:transform .2s,background .2s;
-  user-select:none;
+/* ===== REDUCED MOTION (WCAG 2.3.3) ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
 }
-#a11y-btn:hover{transform:scale(1.1);background:var(--cyan);}
-#a11y-panel{
-  position:fixed;left:18px;bottom:90px;z-index:9998;
-  background:#fff;border-radius:16px;
-  box-shadow:0 10px 40px rgba(0,0,0,.18);
-  padding:1.2rem;width:210px;
-  display:none;flex-direction:column;gap:.5rem;
-  direction:rtl;
-}
-#a11y-panel.open{display:flex;}
-.a11y-title{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:.3rem;text-align:center;}
-.a11y-opt{
-  background:var(--light);border:2px solid transparent;border-radius:10px;
-  padding:.55rem .8rem;font-size:.88rem;cursor:pointer;
-  text-align:right;color:var(--navy);font-family:inherit;
-  transition:all .2s;
-}
-.a11y-opt:hover{border-color:var(--cyan);background:#e8f9fb;}
-.a11y-opt.active{border-color:var(--navy);background:var(--navy);color:#fff;}
-.a11y-reset{
-  margin-top:.3rem;background:none;border:2px solid #ddd;border-radius:10px;
-  padding:.5rem;font-size:.85rem;cursor:pointer;color:var(--gray);
-  font-family:inherit;transition:all .2s;
-}
-.a11y-reset:hover{border-color:#f00;color:#f00;}
-body.big-text p,body.big-text li,body.big-text span{font-size:1.15rem !important;}
-body.big-text h1{font-size:3.2rem !important;}
-body.big-text h2{font-size:2.2rem !important;}
-body.big-text h3{font-size:1.4rem !important;}
-body.high-contrast{filter:contrast(1.6) brightness(1.1);}
-body.high-contrast .service-card,body.high-contrast .tcard,body.high-contrast #navbar{border:2px solid #fff !important;}
-body.highlight-links a{text-decoration:underline !important;outline:3px solid var(--orange) !important;border-radius:3px;outline-offset:2px;}
-body.readable-font,body.readable-font *{font-family:Arial,Helvetica,sans-serif !important;letter-spacing:.4px !important;line-height:2 !important;}
-body.stop-animations *{animation:none !important;transition:none !important;}
-body.stop-animations .reveal{opacity:1 !important;transform:none !important;}
 </style>
 </head>
 <body>
 
-<nav id="navbar">
-  <a href="#home" class="nav-logo">W<em>3</em>bify</a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#home">דף בית</a></li>
-    <li><a href="#services">שירותים</a></li>
-    <li><a href="#about">אודות</a></li>
-    <li><a href="#contact" class="nav-cta">צור קשר →</a></li>
+<!-- ===== SKIP NAVIGATION (WCAG 2.4.1) ===== -->
+<a class="skip-link" href="#main-content">דלג לתוכן הראשי</a>
+<a class="skip-link" href="#contact">דלג לטופס יצירת קשר</a>
+<a class="skip-link" href="#a11y-btn">דלג לתפריט נגישות</a>
+
+<!-- ===== NAVIGATION ===== -->
+<!-- role="banner" is implicit on <header>, nav has landmark role -->
+<nav id="navbar" role="navigation" aria-label="ניווט ראשי">
+  <a href="#home" class="nav-logo" aria-label="Webify - דף הבית">W<em>3</em>bify</a>
+  <ul class="nav-links" id="navLinks" role="list">
+    <li role="listitem"><a href="#home" aria-current="page">דף בית</a></li>
+    <li role="listitem"><a href="#services">שירותים</a></li>
+    <li role="listitem"><a href="#about">אודות</a></li>
+    <li role="listitem"><a href="#contact" class="nav-cta">צור קשר ←</a></li>
   </ul>
-  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <!-- Hamburger with proper ARIA (WCAG 4.1.2) -->
+  <button
+    class="hamburger"
+    id="hamburger"
+    aria-label="פתח תפריט ניווט"
+    aria-expanded="false"
+    aria-controls="navLinks"
+  >
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
 </nav>
 
+<!-- ===== MAIN CONTENT ===== -->
+<main id="main-content">
+
 <!-- HERO -->
-<section id="home">
-  <div class="hero-glow-1"></div>
-  <div class="hero-glow-2"></div>
-  <div class="grid-overlay"></div>
+<section id="home" aria-labelledby="hero-heading">
+  <div class="hero-glow-1" aria-hidden="true"></div>
+  <div class="hero-glow-2" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
   <div class="hero-text">
-    <div class="hero-badge"><span class="badge-dot"></span> סוכנות דיגיטל מובילה בישראל</div>
-    <h1 class="hero-title">בונים אתרים<br><span class="line2">שצומחים</span><br><span class="line3">איתך.</span></h1>
+    <div class="hero-badge" aria-hidden="true"><span class="badge-dot"></span> סוכנות דיגיטל מובילה בישראל</div>
+    <!-- h1 – page title, correct heading hierarchy -->
+    <h1 class="hero-title" id="hero-heading">
+      בונים אתרים<br>
+      <span class="line2">שצומחים</span><br>
+      <span class="line3">איתך.</span>
+    </h1>
     <p class="hero-sub">Webify מתמחה בבניית אתרים מרהיבים, מהירים ומותאמים לכל מסך. הנוכחות הדיגיטלית שלך היא כרטיס הביקור שלך לעולם — בואו נעשה אותה בלתי נשכחת.</p>
     <div class="hero-btns">
       <a href="#services" class="btn-primary">⚡ לשירותים שלנו</a>
       <a href="#contact" class="btn-secondary">📞 דברו איתנו</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num" style="font-size:1.2rem;padding-top:.3rem;">פרויקטים</div><div class="stat-label">מגוונים</div></div>
-      <div class="stat"><div class="stat-num">98%</div><div class="stat-label">מרוצים</div></div>
-      <div class="stat"><div class="stat-num">5★</div><div class="stat-label">דירוג</div></div>
+    <div class="hero-stats" aria-label="נתוני החברה">
+      <div class="stat">
+        <div class="stat-num" aria-label="פרויקטים מגוונים">פרויקטים</div>
+        <div class="stat-label">מגוונים</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">לקוחות מרוצים</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">דירוג</div>
+      </div>
     </div>
   </div>
-  <div class="hero-visual">
+  <div class="hero-visual" aria-hidden="true">
     <div class="hero-img-wrap">
-      <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80" alt="עיצוב אתרים">
+      <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80" alt="">
       <div class="hero-float-card">
-        <div class="float-icon">🚀</div>
+        <div class="float-icon" aria-hidden="true">🚀</div>
         <div class="float-text"><strong>אתר חדש הושק!</strong><span>לקוח מרוצה · עכשיו</span></div>
       </div>
       <div class="hero-float-card2">
@@ -346,123 +467,224 @@ body.stop-animations .reveal{opacity:1 !important;transform:none !important;}
   </div>
 </section>
 
-
-
 <!-- SERVICES -->
-<section id="services">
+<section id="services" aria-labelledby="services-heading">
   <div class="services-header reveal">
-    <div class="section-tag">⚡ מה אנחנו עושים</div>
-    <h2 class="section-title">השירותים <span>שלנו</span></h2>
+    <div class="section-tag" aria-hidden="true">⚡ מה אנחנו עושים</div>
+    <h2 class="section-title" id="services-heading">השירותים <span>שלנו</span></h2>
     <p class="section-desc">מעיצוב ראשוני ועד השקה מלאה — אנחנו לצידך בכל שלב</p>
   </div>
   <div class="services-grid">
-    <div class="service-card reveal">
-      <img class="service-card-img" src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80" alt="בניית אתרים">
+
+    <article class="service-card reveal">
+      <img class="service-card-img" src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80" alt="קוד של אתר אינטרנט - בניית אתרים מקצועית">
       <div class="service-card-body">
-        <div class="service-icon-small ic-cyan">🌐</div>
+        <div class="service-icon-small ic-cyan" aria-hidden="true">🌐</div>
         <h3>בניית אתרים</h3>
         <p>אתרים מקצועיים מהקמה ועד השקה, מותאמים לכל מסך ומהירים במיוחד. טכנולוגיות מתקדמות לחוויה מושלמת.</p>
-        <a href="#contact" class="service-card-link">קבל הצעה ←</a>
+        <a href="#contact" class="service-card-link" aria-label="קבל הצעת מחיר לבניית אתרים">קבל הצעה ←</a>
       </div>
-    </div>
-    <div class="service-card reveal reveal-delay1">
-      <img class="service-card-img" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80" alt="עיצוב UI/UX">
+    </article>
+
+    <article class="service-card reveal reveal-delay1">
+      <img class="service-card-img" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80" alt="עיצוב ממשק משתמש - UI UX">
       <div class="service-card-body">
-        <div class="service-icon-small ic-orange">🎨</div>
+        <div class="service-icon-small ic-orange" aria-hidden="true">🎨</div>
         <h3>עיצוב UI/UX</h3>
         <p>עיצוב ממשקים שמחברים בין אסתטיקה לפונקציונליות. כל פרט מחושב כדי ליצור חוויית משתמש שלא נשכחת.</p>
-        <a href="#contact" class="service-card-link">קבל הצעה ←</a>
+        <a href="#contact" class="service-card-link" aria-label="קבל הצעת מחיר לעיצוב UI UX">קבל הצעה ←</a>
       </div>
-    </div>
-    <div class="service-card reveal reveal-delay2">
-      <img class="service-card-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="שיפור ביצועים">
+    </article>
+
+    <article class="service-card reveal reveal-delay2">
+      <img class="service-card-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="גרפים ונתוני ביצועים - אופטימיזציה">
       <div class="service-card-body">
-        <div class="service-icon-small ic-navy">🚀</div>
+        <div class="service-icon-small ic-navy" aria-hidden="true">🚀</div>
         <h3>שיפור ביצועים</h3>
         <p>אופטימיזציה מלאה: מהירות טעינה, SEO ונגישות. נהפוך את האתר שלך למנוע צמיחה אמיתי.</p>
-        <a href="#contact" class="service-card-link">קבל הצעה ←</a>
+        <a href="#contact" class="service-card-link" aria-label="קבל הצעת מחיר לשיפור ביצועים">קבל הצעה ←</a>
       </div>
-    </div>
+    </article>
 
-    <div class="service-card reveal reveal-delay1">
-      <img class="service-card-img" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80" alt="Responsive Design">
+    <article class="service-card reveal reveal-delay1">
+      <img class="service-card-img" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80" alt="טלפון ומחשב - עיצוב רספונסיבי">
       <div class="service-card-body">
-        <div class="service-icon-small ic-cyan">📱</div>
+        <div class="service-icon-small ic-cyan" aria-hidden="true">📱</div>
         <h3>Responsive Design</h3>
         <p>כל אתר נראה מושלם על כל מסך — מובייל, טאבלט ודסקטופ. ללא פשרות, תמיד.</p>
-        <a href="#contact" class="service-card-link">קבל הצעה ←</a>
+        <a href="#contact" class="service-card-link" aria-label="קבל הצעת מחיר לעיצוב רספונסיבי">קבל הצעה ←</a>
       </div>
-    </div>
-    <div class="service-card reveal reveal-delay2">
-      <img class="service-card-img" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&q=80" alt="תחזוקה">
+    </article>
+
+    <article class="service-card reveal reveal-delay2">
+      <img class="service-card-img" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&q=80" alt="אדם עובד על מחשב נייד - תחזוקת אתרים">
       <div class="service-card-body">
-        <div class="service-icon-small ic-navy">🔧</div>
+        <div class="service-icon-small ic-navy" aria-hidden="true">🔧</div>
         <h3>תחזוקה ותמיכה</h3>
         <p>אחרי ההשקה אנחנו עדיין כאן. עדכונים, גיבויים ותמיכה טכנית שוטפת — תמיד.</p>
-        <a href="#contact" class="service-card-link">קבל הצעה ←</a>
+        <a href="#contact" class="service-card-link" aria-label="קבל הצעת מחיר לתחזוקה ותמיכה">קבל הצעה ←</a>
       </div>
-    </div>
+    </article>
+
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" aria-labelledby="about-heading">
   <div class="about-inner">
     <div class="about-imgs reveal">
-      <div class="about-img-main"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80" alt="הצוות שלנו"></div>
-      <div class="about-img-sec"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80" alt="סביבת עבודה"></div>
-      <div class="about-exp-badge"><strong>ניסיון</strong><span>רב</span></div>
+      <div class="about-img-main">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80" alt="צוות Webify עובד יחד סביב שולחן">
+      </div>
+      <div class="about-img-sec">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80" alt="סביבת עבודה מודרנית ומוארת">
+      </div>
+      <div class="about-exp-badge" aria-label="ניסיון רב בתחום">
+        <strong>ניסיון</strong>
+        <span>רב</span>
+      </div>
     </div>
     <div class="about-content reveal">
-      <div class="section-tag">👥 מי אנחנו</div>
-      <h2 class="section-title">הסיפור <span>שלנו</span></h2>
+      <div class="section-tag" aria-hidden="true">👥 מי אנחנו</div>
+      <h2 class="section-title" id="about-heading">הסיפור <span>שלנו</span></h2>
       <p class="section-desc">Webify נולדה מתוך אהבה לאינטרנט ולעסקים ישראליים. אנחנו צוות של מעצבים ומפתחים שמאמינים שכל עסק ראוי לנוכחות דיגיטלית שמייצגת אותו בצורה הטובה ביותר.</p>
-      <ul class="about-list">
-        <li><div class="check">✓</div>ניסיון רב בבניית אתרים לעסקים ישראליים</li>
-        <li><div class="check">✓</div>עיצוב מותאם אישית לכל לקוח — לא תבניות גנריות</li>
-        <li><div class="check">✓</div>תמיכה לאורך כל הדרך — מרעיון לתוצאה</li>
-        <li><div class="check">✓</div>מחירים הוגנים ושקיפות מלאה בכל שלב</li>
-        <li><div class="check">✓</div>עומדים בלוחות זמנים — תמיד</li>
+      <ul class="about-list" aria-label="יתרונות Webify">
+        <li><div class="check" aria-hidden="true">✓</div>ניסיון רב בבניית אתרים לעסקים ישראליים</li>
+        <li><div class="check" aria-hidden="true">✓</div>עיצוב מותאם אישית לכל לקוח — לא תבניות גנריות</li>
+        <li><div class="check" aria-hidden="true">✓</div>תמיכה לאורך כל הדרך — מרעיון לתוצאה</li>
+        <li><div class="check" aria-hidden="true">✓</div>מחירים הוגנים ושקיפות מלאה בכל שלב</li>
+        <li><div class="check" aria-hidden="true">✓</div>עומדים בלוחות זמנים — תמיד</li>
       </ul>
-      <a href="#contact" class="btn-primary" style="display:inline-flex;align-items:center;gap:.5rem;color:white;">🤝 בואו נדבר</a>
+      <a href="#contact" class="btn-primary" style="display:inline-flex;align-items:center;gap:.5rem;">🤝 בואו נדבר</a>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" aria-labelledby="contact-heading">
   <div class="contact-inner">
     <div>
-      <div class="section-tag reveal">📬 בואו נדבר</div>
-      <h2 class="section-title reveal">צור <span>קשר</span></h2>
+      <div class="section-tag reveal" aria-hidden="true">📬 בואו נדבר</div>
+      <h2 class="section-title reveal" id="contact-heading">צור <span>קשר</span></h2>
       <p class="section-desc reveal" style="margin-bottom:1.5rem">יש לכם פרויקט? שאלה? רעיון? אנחנו כאן ונשמח לשמוע!</p>
-      <div class="contact-img-wrap reveal"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="צור קשר"></div>
-      <div class="contact-info">
-        <div class="contact-item reveal">
-          <div class="contact-item-icon">📧</div>
-          <div class="contact-item-text"><h4>אימייל</h4><a href="mailto:webify2make@gmail.com">webify2make@gmail.com</a></div>
+      <div class="contact-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="צוות תמיכה מקצועי של Webify">
+      </div>
+      <div class="contact-info" role="list" aria-label="פרטי יצירת קשר">
+        <div class="contact-item reveal" role="listitem">
+          <div class="contact-item-icon" aria-hidden="true">📧</div>
+          <div class="contact-item-text">
+            <h3>אימייל</h3>
+            <a href="mailto:webify2make@gmail.com" aria-label="שלח אימייל ל-webify2make@gmail.com">webify2make@gmail.com</a>
+          </div>
         </div>
-        <div class="contact-item reveal">
-          <div class="contact-item-icon">📍</div>
-          <div class="contact-item-text"><h4>מיקום</h4><p>ישראל</p></div>
+        <div class="contact-item reveal" role="listitem">
+          <div class="contact-item-icon" aria-hidden="true">📍</div>
+          <div class="contact-item-text">
+            <h3>מיקום</h3>
+            <p>ישראל</p>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="reveal">
       <div class="contact-form-wrap">
-        <div class="form-title">✉️ שלחו לנו הודעה</div>
-        <div class="contact-form" id="contactForm">
+        <div class="form-title" id="form-title">✉️ שלחו לנו הודעה</div>
+
+        <!-- Live region for form status (WCAG 4.1.3) -->
+        <div role="status" aria-live="polite" aria-atomic="true" id="form-status" style="clip:rect(0 0 0 0);position:absolute;width:1px;height:1px;overflow:hidden;"></div>
+
+        <div class="contact-form" id="contactForm" aria-labelledby="form-title" novalidate>
           <div class="form-row">
-            <div class="form-group"><label>שם מלא</label><input type="text" placeholder="ישראל ישראלי" id="fname"></div>
-            <div class="form-group"><label>טלפון</label><input type="tel" placeholder="050-0000000" id="fphone"></div>
+            <div class="form-group">
+              <!-- Explicit label association (WCAG 1.3.1, 3.3.2) -->
+              <label for="fname">
+                שם מלא <span class="required-mark" aria-label="שדה חובה">*</span>
+              </label>
+              <input
+                type="text"
+                id="fname"
+                name="fname"
+                placeholder="ישראל ישראלי"
+                autocomplete="name"
+                required
+                aria-required="true"
+                aria-describedby="fname-error"
+              >
+              <span class="field-error" id="fname-error" role="alert" aria-live="assertive">נא להזין שם מלא</span>
+            </div>
+            <div class="form-group">
+              <label for="fphone">טלפון</label>
+              <input
+                type="tel"
+                id="fphone"
+                name="fphone"
+                placeholder="050-0000000"
+                autocomplete="tel"
+                aria-describedby="fphone-hint"
+              >
+              <span id="fphone-hint" style="font-size:.78rem;color:var(--gray);">אופציונלי</span>
+            </div>
           </div>
-          <div class="form-group"><label>אימייל</label><input type="email" placeholder="email@example.com" id="femail"></div>
-          <div class="form-group"><label>סוג השירות</label><input type="text" placeholder="לדוגמה: בניית אתר עסקי" id="fservice"></div>
-          <div class="form-group"><label>הודעה</label><textarea placeholder="ספרו לנו על הפרויקט שלכם..." id="fmsg"></textarea></div>
-          <button class="btn-submit" onclick="submitForm()"><span>→ שלח הודעה</span></button>
+          <div class="form-group">
+            <label for="femail">
+              אימייל <span class="required-mark" aria-label="שדה חובה">*</span>
+            </label>
+            <input
+              type="email"
+              id="femail"
+              name="femail"
+              placeholder="email@example.com"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="femail-error"
+            >
+            <span class="field-error" id="femail-error" role="alert" aria-live="assertive">נא להזין כתובת אימייל תקינה</span>
+          </div>
+          <div class="form-group">
+            <label for="fservice">סוג השירות</label>
+            <input
+              type="text"
+              id="fservice"
+              name="fservice"
+              placeholder="לדוגמה: בניית אתר עסקי"
+              autocomplete="off"
+            >
+          </div>
+          <div class="form-group">
+            <label for="fmsg">
+              הודעה <span class="required-mark" aria-label="שדה חובה">*</span>
+            </label>
+            <textarea
+              id="fmsg"
+              name="fmsg"
+              placeholder="ספרו לנו על הפרויקט שלכם..."
+              required
+              aria-required="true"
+              aria-describedby="fmsg-error"
+            ></textarea>
+            <span class="field-error" id="fmsg-error" role="alert" aria-live="assertive">נא להזין הודעה</span>
+          </div>
+          <!-- Required fields note (WCAG 3.3.2) -->
+          <p style="font-size:.8rem;color:var(--gray);margin-top:-.3rem;">
+            <span aria-hidden="true">*</span> שדות חובה
+          </p>
+          <button
+            class="btn-submit"
+            id="submitBtn"
+            type="button"
+            onclick="submitForm()"
+            aria-label="שלח הודעה לWebify"
+          >
+            <span>← שלח הודעה</span>
+          </button>
         </div>
-        <div class="form-success" id="formSuccess">
-          <div style="font-size:3rem;margin-bottom:1rem">✅</div>
+
+        <!-- Success message – receives focus after submission (WCAG 4.1.3) -->
+        <div class="form-success" id="formSuccess" role="alert" aria-live="assertive" tabindex="-1">
+          <div style="font-size:3rem;margin-bottom:1rem" aria-hidden="true">✅</div>
           <h3>ההודעה נשלחה בהצלחה!</h3>
           <p>נחזור אליכם בהקדם האפשרי.</p>
         </div>
@@ -472,100 +694,278 @@ body.stop-animations .reveal{opacity:1 !important;transform:none !important;}
 </section>
 
 <!-- CTA BANNER -->
-<section id="cta">
+<section id="cta" aria-labelledby="cta-heading">
   <div class="cta-inner">
-    <h2>מוכנים לקחת את העסק<br>לשלב <span>הבא</span>?</h2>
+    <h2 id="cta-heading">מוכנים לקחת את העסק<br>לשלב <span>הבא</span>?</h2>
     <p>הצטרפו למאות לקוחות מרוצים שכבר בחרו ב-Webify</p>
     <a href="#contact" class="btn-primary" style="font-size:1.05rem;padding:1rem 2.5rem;">🚀 התחילו עכשיו</a>
   </div>
 </section>
 
-<!-- ACCESSIBILITY WIDGET -->
-<div id="a11y-btn" onclick="toggleA11y()" title="נגישות" aria-label="פתח תפריט נגישות" role="button" tabindex="0">
+</main><!-- end #main-content -->
+
+<!-- ===== ACCESSIBILITY WIDGET ===== -->
+<!-- Meets Israeli requirement for accessibility declaration widget -->
+<button
+  id="a11y-btn"
+  onclick="toggleA11y()"
+  aria-label="פתח תפריט נגישות"
+  aria-expanded="false"
+  aria-controls="a11y-panel"
+  aria-haspopup="dialog"
+>
   ♿
-</div>
-<div id="a11y-panel" role="dialog" aria-label="תפריט נגישות">
-  <div class="a11y-title">תפריט נגישות</div>
-  <button class="a11y-opt" onclick="toggleFeature('big-text',this)">🔠 הגדלת טקסט</button>
-  <button class="a11y-opt" onclick="toggleFeature('high-contrast',this)">🌗 ניגודיות גבוהה</button>
-  <button class="a11y-opt" onclick="toggleFeature('highlight-links',this)">🔗 הדגשת קישורים</button>
-  <button class="a11y-opt" onclick="toggleFeature('readable-font',this)">📖 פונט קריא</button>
-  <button class="a11y-opt" onclick="toggleFeature('stop-animations',this)">⏸ עצירת אנימציות</button>
-  <button class="a11y-reset" onclick="resetA11y()">↺ איפוס</button>
+</button>
+
+<div
+  id="a11y-panel"
+  role="dialog"
+  aria-label="תפריט נגישות"
+  aria-modal="false"
+>
+  <div class="a11y-title" id="a11y-title">אפשרויות נגישות</div>
+  <button class="a11y-opt" onclick="toggleFeature('big-text',this)" aria-pressed="false">🔠 הגדלת טקסט</button>
+  <button class="a11y-opt" onclick="toggleFeature('high-contrast',this)" aria-pressed="false">🌗 ניגודיות גבוהה</button>
+  <button class="a11y-opt" onclick="toggleFeature('highlight-links',this)" aria-pressed="false">🔗 הדגשת קישורים</button>
+  <button class="a11y-opt" onclick="toggleFeature('readable-font',this)" aria-pressed="false">📖 פונט קריא</button>
+  <button class="a11y-opt" onclick="toggleFeature('stop-animations',this)" aria-pressed="false">⏸ עצירת אנימציות</button>
+  <button class="a11y-reset" onclick="resetA11y()" aria-label="אפס את כל הגדרות הנגישות">↺ איפוס</button>
 </div>
 
-<!-- FOOTER -->
-<footer>
+<!-- ===== FOOTER ===== -->
+<footer role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="#home" class="nav-logo" style="display:inline-block;margin-bottom:.5rem;">W<em style="-webkit-text-fill-color:var(--orange);color:var(--orange)">3</em>bify</a>
+      <a href="#home" class="nav-logo" style="display:inline-block;margin-bottom:.5rem;" aria-label="Webify - חזרה לדף הבית">
+        W<em style="-webkit-text-fill-color:var(--orange);color:var(--orange)">3</em>bify
+      </a>
       <p>בונים אתרים שצומחים איתך.<br>Build. Grow. Innovate.</p>
     </div>
-    <div class="footer-col"><h4>ניווט</h4><ul><li><a href="#home">דף בית</a></li><li><a href="#services">שירותים</a></li><li><a href="#about">אודות</a></li><li><a href="#contact">צור קשר</a></li></ul></div>
-    <div class="footer-col"><h4>שירותים</h4><ul><li><a href="#services">בניית אתרים</a></li><li><a href="#services">עיצוב UI/UX</a></li><li><a href="#services">שיפור ביצועים</a></li><li><a href="#services">חנויות אונליין</a></li></ul></div>
-    <div class="footer-col"><h4>צרו קשר</h4><ul><li><a href="mailto:webify2make@gmail.com">webify2make@gmail.com</a></li><li><a href="#">ישראל</a></li></ul></div>
+    <div class="footer-col">
+      <h2>ניווט</h2>
+      <ul>
+        <li><a href="#home">דף בית</a></li>
+        <li><a href="#services">שירותים</a></li>
+        <li><a href="#about">אודות</a></li>
+        <li><a href="#contact">צור קשר</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>שירותים</h2>
+      <ul>
+        <li><a href="#services">בניית אתרים</a></li>
+        <li><a href="#services">עיצוב UI/UX</a></li>
+        <li><a href="#services">שיפור ביצועים</a></li>
+        <li><a href="#services">Responsive Design</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>צרו קשר</h2>
+      <ul>
+        <li><a href="mailto:webify2make@gmail.com" aria-label="שלח אימייל ל webify2make@gmail.com">webify2make@gmail.com</a></li>
+        <li><a href="#contact">ישראל</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer-bottom">© 2025 Webify. כל הזכויות שמורות | <a href="mailto:webify2make@gmail.com">webify2make@gmail.com</a></div>
+  <div class="footer-bottom">
+    <p>
+      © 2025 Webify. כל הזכויות שמורות |
+      <a href="mailto:webify2make@gmail.com">webify2make@gmail.com</a> |
+      <a href="#a11y-btn">הצהרת נגישות</a>
+    </p>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   emailjs.init('SPkl2rDhSuzp9DiNK');
 
-  window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',scrollY>30);});
-  document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open');});
-  const io=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');io.unobserve(x.target);}});},{threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // ===== NAV SCROLL =====
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', scrollY > 30);
+  });
 
-  function toggleA11y(){
-    document.getElementById('a11y-panel').classList.toggle('open');
-  }
-  function toggleFeature(cls, el){
-    document.body.classList.toggle(cls);
-    el.classList.toggle('active');
-  }
-  function resetA11y(){
-    ['big-text','high-contrast','highlight-links','readable-font','stop-animations'].forEach(c=>{
-      document.body.classList.remove(c);
+  // ===== HAMBURGER (WCAG 4.1.2 – update aria-expanded) =====
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט ניווט' : 'פתח תפריט ניווט');
+  });
+
+  // Close nav on link click (mobile)
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'פתח תפריט ניווט');
     });
-    document.querySelectorAll('.a11y-opt').forEach(b=>b.classList.remove('active'));
+  });
+
+  // ===== SCROLL REVEAL =====
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(x => {
+      if (x.isIntersecting) {
+        x.target.classList.add('visible');
+        io.unobserve(x.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ===== ACCESSIBILITY WIDGET =====
+  function toggleA11y() {
+    const panel = document.getElementById('a11y-panel');
+    const btn = document.getElementById('a11y-btn');
+    const isOpen = panel.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    if (isOpen) {
+      // Move focus into panel for keyboard users (WCAG 2.1.1)
+      panel.querySelector('.a11y-opt').focus();
+    }
   }
-  document.addEventListener('click',function(e){
-    const panel=document.getElementById('a11y-panel');
-    const btn=document.getElementById('a11y-btn');
-    if(panel.classList.contains('open') && !panel.contains(e.target) && !btn.contains(e.target)){
+
+  function toggleFeature(cls, el) {
+    document.body.classList.toggle(cls);
+    const isActive = document.body.classList.contains(cls);
+    el.classList.toggle('active', isActive);
+    el.setAttribute('aria-pressed', isActive);
+    // Save to sessionStorage (WCAG 3.2.1 – persist preferences)
+    try { sessionStorage.setItem('a11y-' + cls, isActive); } catch(e) {}
+  }
+
+  function resetA11y() {
+    ['big-text','high-contrast','highlight-links','readable-font','stop-animations'].forEach(c => {
+      document.body.classList.remove(c);
+      try { sessionStorage.removeItem('a11y-' + c); } catch(e) {}
+    });
+    document.querySelectorAll('.a11y-opt').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+  }
+
+  // Restore saved preferences on load
+  ['big-text','high-contrast','highlight-links','readable-font','stop-animations'].forEach(c => {
+    try {
+      if (sessionStorage.getItem('a11y-' + c) === 'true') {
+        document.body.classList.add(c);
+        const btn = document.querySelector(`[onclick="toggleFeature('${c}',this)"]`);
+        if (btn) { btn.classList.add('active'); btn.setAttribute('aria-pressed','true'); }
+      }
+    } catch(e) {}
+  });
+
+  // Close panel on outside click or Escape key
+  document.addEventListener('click', function(e) {
+    const panel = document.getElementById('a11y-panel');
+    const btn = document.getElementById('a11y-btn');
+    if (panel.classList.contains('open') && !panel.contains(e.target) && !btn.contains(e.target)) {
       panel.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const panel = document.getElementById('a11y-panel');
+      if (panel.classList.contains('open')) {
+        panel.classList.remove('open');
+        document.getElementById('a11y-btn').setAttribute('aria-expanded','false');
+        document.getElementById('a11y-btn').focus();
+      }
     }
   });
 
-  function submitForm(){
-    const name = document.getElementById('fname').value.trim();
-    const phone = document.getElementById('fphone').value.trim();
-    const email = document.getElementById('femail').value.trim();
-    const service = document.getElementById('fservice').value.trim();
-    const msg = document.getElementById('fmsg').value.trim();
+  // ===== FORM VALIDATION (WCAG 3.3.1, 3.3.3) =====
+  function validateField(id, errorId, validateFn) {
+    const field = document.getElementById(id);
+    const errorEl = document.getElementById(errorId);
+    const isValid = validateFn(field.value.trim());
+    field.setAttribute('aria-invalid', !isValid);
+    errorEl.classList.toggle('visible', !isValid);
+    return isValid;
+  }
 
-    if(!name || !email || !msg){ alert('נא למלא את כל השדות הנדרשים'); return; }
+  function submitForm() {
+    let valid = true;
 
-    const btn = document.querySelector('.btn-submit');
+    // Validate name
+    if (!validateField('fname','fname-error', v => v.length > 0)) valid = false;
+    // Validate email
+    if (!validateField('femail','femail-error', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))) valid = false;
+    // Validate message
+    if (!validateField('fmsg','fmsg-error', v => v.length > 0)) valid = false;
+
+    if (!valid) {
+      // Move focus to first error (WCAG 3.3.1)
+      const firstInvalid = document.querySelector('[aria-invalid="true"]');
+      if (firstInvalid) firstInvalid.focus();
+      // Update status region
+      document.getElementById('form-status').textContent = 'נמצאו שגיאות בטופס. נא לתקן ולנסות שוב.';
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.querySelector('span').textContent = '⏳ שולח...';
+    // Announce to screen reader
+    document.getElementById('form-status').textContent = 'שולח הודעה...';
 
     emailjs.send('service_1zdm3pn', 'template_nhymhfh', {
-      name: name,
-      phone: phone,
-      email: email,
-      service: service,
-      message: msg
+      name: document.getElementById('fname').value.trim(),
+      phone: document.getElementById('fphone').value.trim(),
+      email: document.getElementById('femail').value.trim(),
+      service: document.getElementById('fservice').value.trim(),
+      message: document.getElementById('fmsg').value.trim()
     }).then(() => {
-      document.getElementById('contactForm').style.display='none';
-      document.getElementById('formSuccess').style.display='block';
+      document.getElementById('contactForm').style.display = 'none';
+      const successEl = document.getElementById('formSuccess');
+      successEl.style.display = 'block';
+      // Move focus to success message (WCAG 4.1.3)
+      successEl.focus();
+      document.getElementById('form-status').textContent = 'ההודעה נשלחה בהצלחה! נחזור אליכם בהקדם.';
     }).catch(() => {
-      alert('אירעה שגיאה בשליחה, אנא נסה שוב או פנה אלינו ישירות במייל.');
+      document.getElementById('form-status').textContent = 'אירעה שגיאה בשליחה. נא לנסות שוב.';
+      const alertEl = document.createElement('div');
+      alertEl.setAttribute('role','alert');
+      alertEl.textContent = 'אירעה שגיאה בשליחה. נא לנסות שוב או לפנות אלינו ישירות במייל.';
+      alertEl.style.cssText = 'padding:.8rem;background:#fff0f0;border:2px solid #c30000;border-radius:8px;color:#c30000;font-weight:600;margin-bottom:1rem;';
+      document.getElementById('contactForm').prepend(alertEl);
       btn.disabled = false;
-      btn.querySelector('span').textContent = '→ שלח הודעה';
+      btn.querySelector('span').textContent = '← שלח הודעה';
     });
   }
+
+  // Real-time validation on blur (WCAG 3.3.1 – immediate feedback)
+  document.getElementById('fname').addEventListener('blur', () => {
+    validateField('fname','fname-error', v => v.length > 0);
+  });
+  document.getElementById('femail').addEventListener('blur', () => {
+    validateField('femail','femail-error', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+  });
+  document.getElementById('fmsg').addEventListener('blur', () => {
+    validateField('fmsg','fmsg-error', v => v.length > 0);
+  });
+
+  // Update aria-current on scroll (WCAG 2.4.6)
+  const sections = ['home','services','about','contact'];
+  const navItems = {};
+  sections.forEach(id => {
+    navItems[id] = document.querySelector(`.nav-links a[href="#${id}"]`);
+  });
+  const sectionEls = sections.map(id => document.getElementById(id));
+  window.addEventListener('scroll', () => {
+    let current = 'home';
+    sectionEls.forEach((el, i) => {
+      if (el && window.scrollY >= el.offsetTop - 100) current = sections[i];
+    });
+    sections.forEach(id => {
+      if (navItems[id]) {
+        navItems[id].setAttribute('aria-current', id === current ? 'page' : 'false');
+      }
+    });
+  }, { passive: true });
 </script>
 </body>
 </html>
